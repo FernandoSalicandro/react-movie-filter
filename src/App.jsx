@@ -28,7 +28,7 @@ function App() {
 
    
   const finalList = newList.filter(curFilm =>
-    curFilm.title.toLowerCase().includes(search.toLowerCase())
+    curFilm.title.trim().toLowerCase().includes(search.trim().toLowerCase())
   )
 
   setSelectedList(finalList)

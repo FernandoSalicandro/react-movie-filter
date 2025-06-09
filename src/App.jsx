@@ -13,6 +13,8 @@ function App() {
   ]
   const generi = ["Tutti", "Fantascienza", "Thriller", "Romantico", "Azione"]
   //stati
+  const [tuttiIFilm, setTuttiIFilm] = useState(films)
+  const [generiInAggiornamento, setGeneriInAggiornamento] = useState(generi)
   const [selectedGenre, setSelectedGenre] = useState("Tutti");
   const [selectedList, setSelectedList] = useState(films);
   const [search, setSearch] = useState("");
@@ -26,19 +28,18 @@ function App() {
   //funzioni
 
   //selettore + filtro in tempo reale
-  useEffect(() => {
-    const newList = selectedGenre === "Tutti" ?
-      films :
-      films.filter(curFilm => curFilm.genre === selectedGenre)
+ useEffect(() => {
+  const newList = selectedGenre === "Tutti"
+    ? tuttiIFilm
+    : tuttiIFilm.filter(curFilm => curFilm.genre === selectedGenre)
 
+  const finalList = newList.filter(curFilm =>
+    curFilm.title.trim().toLowerCase().includes(search.trim().toLowerCase())
+  )
 
-    const finalList = newList.filter(curFilm =>
-      curFilm.title.trim().toLowerCase().includes(search.trim().toLowerCase())
-    )
+  setSelectedList(finalList)
+}, [selectedGenre, search, tuttiIFilm])
 
-    setSelectedList(finalList)
-
-  }, [selectedGenre, search])
 
 const aggiungiFilm = () => {
 
@@ -51,6 +52,14 @@ const aggiungiFilm = () => {
   setTitoloDaAggiungere("")
   setGenereDaAggiungere("")
   setMostraForm(false)
+  setTuttiIFilm([...tuttiIFilm, newFilm])
+
+
+   if (!generiInAggiornamento.includes(newFilm.genre)) {
+    setGeneriInAggiornamento([...generiInAggiornamento, newFilm.genre])
+  }
+
+  
 
 
 }
@@ -64,7 +73,7 @@ const aggiungiFilm = () => {
 
         <select name="" id="" value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
 
-          {generi.map(genere => {
+          {generiInAggiornamento.map(genere => {
             return (<option key={genere} >{genere}</option>)
           })}
         </select>

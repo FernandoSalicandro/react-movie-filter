@@ -1,0 +1,28 @@
+h1 {
+  text-align: center;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+li {
+  padding: 10px;
+  border: 1px solid grey;
+  list-style: none;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+input {
+  width: 50%;
+}
+
+select {
+ width: 30%;
+}

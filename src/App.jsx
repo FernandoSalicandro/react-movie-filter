@@ -85,11 +85,6 @@ const aggiungiFilm = () => {
       <div className="wrapper mt-2"><button onClick={() => setMostraForm(!mostraForm)}>Aggiungi Un Film</button>
 
 
-
-
-      </div>
-      <div className="wrapper mt-2">
-
         {mostraForm && (
           <>
             <input type="text" placeholder="Titolo" value={titoloDaAggiugere} onChange={(e) => setTitoloDaAggiungere(e.target.value)} />
